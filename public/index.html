@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> Lian Meng Chain</title>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="The scalable Layer1, Main-net EVM blockchain with provable random numbers" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/vendor/font-awesome/css/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/prompt.css" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/backend-plugin.min.css"> 
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/backend.css?v=1.0.0">  </head>
+
+
+    <style>
+      .u-xs-avatar{
+        width:1.4rem;height:1.4rem
+      }
+    </style>
+  </head>
+  <body >
+     <!-- loader Start -->
+      <div id="loading">
+        <div id="loading-center">
+        </div>
+      </div>
+      <!-- loader END -->
+
+    <div id="root"></div>
+
+    <div id="divcookie" class="fixed-bottom w-md-75 w-xl-50 mx-md-auto mx-3" style="display: none;">
+      <div class="alert alert-light border shadow p-3" role="alert">
+        <div class="d-md-flex align-items-center" style="justify-content: center;">
+            <span>
+              <p class="text-dark mr-3 mb-2 mb-md-0">
+                <i class="far fa-cookie-bite text-secondary mr-1"></i>This website uses localstorage to improve your experience 
+              </p>
+            </span>
+            <div>
+              <button id="btnCookie" class="btn btn-sm btn-primary text-nowrap py-1" data-dismiss="alert" aria-label="Close">Got It</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </body>  
+    <!-- eChart -->
+  <!-- <script src="assets/js/echarts.min.js"></script> -->
+  <script src="%PUBLIC_URL%/assets/js/backend-bundle.min.js"></script>
+  <!-- Chart Custom JavaScript -->
+  <script src="%PUBLIC_URL%/assets/js/customizer.js"></script> 
+  <script src="%PUBLIC_URL%/assets/js/sidebar.js"></script>   
+  <!-- slider JavaScript -->
+  <script src="%PUBLIC_URL%/assets/js/slider.js"></script>  
+  <script src="%PUBLIC_URL%/assets/js/prompt.js"></script>  
+  <!-- app JavaScript -->
+  <script src="%PUBLIC_URL%/assets/js/app.js"></script> 
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7GL5Z067T"> -->
+
+  </script>
+ 
+
+  <script type="text/javascript"> 
+   var p = loadPrompt();
+    window.prompt = p;
+    var cookieconsent = window.localStorage.getItem('hsbscan_item_consent') || 'False'; 
+    if (cookieconsent !== "True") {
+        document.getElementById("divcookie").style.display = "block";
+    };
+ 
+
+    $("#btnCookie").click(function () {
+        $("#divcookie").fadeOut("slow", function () { 
+            window.localStorage.setItem('hsbscan_item_consent', 'True');
+        });
+    });
+
+ 
+  
+  </script>
+
+</html>

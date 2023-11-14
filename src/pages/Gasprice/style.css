@@ -1,0 +1,180 @@
+.gas-price-bg {
+  background-color: #f3f8fd;
+}
+.gas-container {
+  margin-top: calc(50vh - 350px);
+  margin-bottom: 40px;
+  border-radius: 8px;
+  background-color: #fff;
+  text-align: center;
+}
+.gas-container h1 {
+  margin-bottom: 0;
+  padding-top: 57px;
+  padding-bottom: 16px;
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 500;
+}
+.gas-container h5 {
+  margin-bottom: 0;
+  font-size: 16px;
+  line-height: 16px;
+  color: #afb5c0;
+}
+.gas-container .loading {
+  width: 120px;
+  margin: 40px auto 60px auto;
+}
+.gas-container .fast-box {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto;
+  background: rgba(18, 201, 137, 0.1);
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.gas-container .fast-box img {
+  width: 28px !important;
+  height: 28px !important;
+}
+.gas-container .gas-card-box {
+  padding-bottom: 56px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.gas-container .gas-card {
+  width: 30%;
+  max-width: 300px;
+  border: 1px solid #eff1f5;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 32px 0;
+}
+.gas-container .gas-card img {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto;
+}
+.gas-container .speed {
+  color: #1d2129;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 500;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+.gas-container .speed-number {
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 500;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+.gas-container .speed-number.fast {
+  color: #12c989;
+}
+.gas-container .speed-number.average {
+  color: #3f7fff;
+}
+.gas-container .speed-number.slow {
+  color: #ea3854;
+}
+.gas-container .speed-unit {
+  font-size: 16px;
+  line-height: 16px;
+  color: #afb5c0;
+  margin-bottom: 0;
+}
+.gas-container .middle-card {
+  margin: 0 2%;
+}
+@media (max-width: 768px) {
+  .gas-container .container {
+    padding-bottom: 64px;
+  }
+  .gas-container {
+    margin-top: 40px;
+  }
+  .gas-container h1 {
+    font-size: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 34px;
+    padding-bottom: 12px;
+  }
+  .gas-container h5 {
+    font-size: 12px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .gas-container .loading {
+    margin: 24px auto 42px auto;
+  }
+  .gas-container .gas-card-box {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 20px 40px 20px;
+  }
+  .gas-container .gas-card-box .middle-card {
+    margin: 12px 0;
+  }
+  .gas-container .gas-card-box .gas-card {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 16px;
+  }
+  .gas-container .gas-card-box .fast-box {
+    width: 32px;
+    height: 32px;
+    margin-left: 0;
+    margin-right: 12px;
+  }
+  .gas-container .gas-card-box .fast-box img {
+    width: 22px !important;
+    height: 22px !important;
+    margin-right: 0;
+  }
+  .gas-container .gas-card-box img {
+    width: 32px;
+    height: 32px;
+    margin-left: 0;
+    margin-right: 12px;
+  }
+  .gas-container .gas-card-box .speed {
+    font-size: 14px;
+    margin: 0;
+  }
+  .gas-container .gas-card-box .speed-number {
+    margin-left: auto;
+    margin-bottom: 0;
+    font-size: 24px;
+  }
+  .gas-container .gas-card-box .speed-unit {
+    font-size: 12px;
+    margin-left: 6px;
+  }
+}

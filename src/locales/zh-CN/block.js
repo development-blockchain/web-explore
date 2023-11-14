@@ -1,0 +1,33 @@
+const block = { 
+    'block.title': '区块详情', 
+    'block.Overview': '概况',   
+    'block.BlockHeight': '区块高度', 
+    'block.BlockHash': '区块哈希', 
+    'block.Timestamp': '时间戳', 
+    'block.TxCount': '数量', 
+    'block.Validated': '验证者', 
+    'block.blockReward': '区块奖励', 
+    'block.Transactions': '交易', 
+    'block.transactions': '交易', 
+    'block.ClickTransactions': '点击查看交易', 
+    'block.contractInteralTransactions': '合约内部交易', 
+    'block.thisblock': '在区块中', 
+    'block.Random': '随机数(16进制)', 
+    'block.RandomNumber': '随机数(十进制)', 
+    'block.UnclesReward': '叔区块奖励', 
+    'block.Difficulty': '难度值', 
+    'block.TotalDiff': '总难度值', 
+    'block.Size': '容量', 
+    'block.gasUsed': '燃料费用', 
+    'block.gasLimit': '燃料限制', 
+    'block.extraData': '额外数据', 
+    'block.hash': '哈希', 
+    'block.ParentHash': '父区块哈希值', 
+    'block.Sha3Uncles': '(Sha3) 叔区块', 
+    'block.Nonce': '随机数',  
+    'block.Overview.ClicktoseeLess': '点击查看较少',
+    'block.Overview.ClicktoseeMore': '点击查看更多',
+
+};
+
+export default block;

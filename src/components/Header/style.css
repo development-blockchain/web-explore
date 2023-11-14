@@ -1,0 +1,19 @@
+.u-header {
+  position: relative;
+  right: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
+}
+
+
+.logo-title{
+  color: #FFF;
+  font-weight: bold;
+}
+.u-header__nav-link{
+  color:#ffffff;
+}
+.u-header .active>.u-header__nav-link, .u-header__nav-item:focus .u-header__nav-link, .u-header__nav-item:hover .u-header__nav-link{
+  color:#ffffff;
+}

@@ -1,0 +1,14 @@
+.popover {
+    min-height: 100px;
+    min-width: 310px;
+    border: none;
+    box-shadow: 0 0.5rem 1.2rem rgba(189,197,209,.7);
+  }
+
+  .popover-body {
+    padding: 1rem;
+  }
+
+  .spinner-wrapper__icon{
+      top: 40%
+  }
