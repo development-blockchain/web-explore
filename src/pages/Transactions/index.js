@@ -160,47 +160,53 @@ export default function Transactions() {
       } 
       readCipherRequest.run({...form}).then( 
             res => {  
-                if (res.code === 0) { 
-                    let data = res.data,
-                    c = data.c,
-                    c_little = data.c_little,
-                    nodenum = data.nodenum,
-                    entries = data.shares; 
-                    console.log("c_little: " + c_little)
-                    console.log("shares: " + entries)
+                if (res.code === 0) {   
+                  try{ 
+                      let data = res.data,
+                      c = data.c,
+                      c_little = data.c_little,
+                      nodenum = data.nodenum,
+                      entries = data.shares; 
+                      console.log("c_little: " + c_little)
+                      console.log("shares: " + entries)
 
-                    let dr_list = new Array(nodenum).fill(null)
-                    let dr_count = 0
-                    entries.forEach(strentry => {
-                        const entry = JSON.parse(strentry)
-                        const index = entry.replica_id
-                        const dr = decrypt(entry.share.substring(2), key, 1)
-                        if (dr.length !== 0) {
-                            dr_list[index] = JSON.parse(dr)
-                            dr_count++
-                        }
-                    })
-                    let ndr = new Array()
-                    for (let i = 0; i < dr_list.length; i++) {
-                    if (dr_list[i] != null) {
-                    ndr.push(dr_list[i])
-                    }
-                    }
-                    dr_list = ndr
+                      let dr_list = new Array(nodenum).fill(null)
+                      let dr_count = 0
+                      entries.forEach(strentry => {
+                          const entry = JSON.parse(strentry)
+                          const index = entry.replica_id
+                          const dr = decrypt(entry.share.substring(2), key, 1)
+                          if (dr.length !== 0) {
+                              dr_list[index] = JSON.parse(dr)
+                              dr_count++
+                          }
+                      })
+                      let ndr = new Array()
+                      for (let i = 0; i < dr_list.length; i++) {
+                      if (dr_list[i] != null) {
+                      ndr.push(dr_list[i])
+                      }
+                      }
+                      dr_list = ndr
 
 
-                    const cipher = JSON.parse(c_little)
-                    for (let i = 0; i < dr_list.length; i++) {
-                        verify_share(cipher, pub, dr_list[i])
-                        // console.log("Verify share--", i, "------",  )
-                    }
-                    let key_TDH2 = combine_Share(pub, cipher, dr_list, parseInt(nodenum / 3) + 1)
+                      const cipher = JSON.parse(c_little)
+                      for (let i = 0; i < dr_list.length; i++) {
+                          verify_share(cipher, pub, dr_list[i])
+                          // console.log("Verify share--", i, "------",  )
+                      }
+                      let key_TDH2 = combine_Share(pub, cipher, dr_list, parseInt(nodenum / 3) + 1)
 
-                    let decmsg = decrypt_SM4(key_TDH2, cipher)
-                    setMsg(decmsg);
-                    setShowMsgDlg(true);
+                      let decmsg = decrypt_SM4(key_TDH2, cipher)
+                      console.log("decmsg: " + decmsg) 
+                      
+                      setMsg(decmsg);
+                      prompt.inform('读取成功!');
+                  }catch(err){
+                      prompt.error('数据解密失败!',false);
+                  } 
                 }else{
-                    prompt.error('读取失败!' +res.cnMsg,false);
+                    prompt.error(res.cnMsg,false);
                 }
             }, 
             err=>{
@@ -234,7 +240,7 @@ export default function Transactions() {
 
     T.loading("正在提交...");  
     const userId = user.user_id;
-    const otherPublic = state.selectOption?.map(obj => obj.value);
+    const otherPublic = selectState.selectOption?.map(obj => obj.value); 
     const WriteInfo = {
       UserID: userId,
       Txid: txId,
@@ -293,7 +299,7 @@ export default function Transactions() {
 
     T.loading("正在提交...");  
     const userId = user.user_id;
-    const otherPublic = state.selectOption?.map(obj => obj.value);
+    const otherPublic = selectState.selectOption?.map(obj => obj.value);
     const WriteInfo = {
       UserID: userId,
       Txid: txId,
