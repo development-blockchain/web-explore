@@ -34,14 +34,10 @@
         jQuery(document).on("click", '.side-menu > li > a', function() {
             jQuery('.side-menu > li > a').parent().removeClass('active');
             jQuery(this).parent().addClass('active');
-        });
-
+        }); 
         // Active menu
-        var parents = jQuery('li.active').parents('.submenu.collapse');
-
-        parents.addClass('show');
-
-
+        var parents = jQuery('li.active').parents('.submenu.collapse'); 
+        parents.addClass('show'); 
         parents.parents('li').addClass('active');
         jQuery('li.active > a[aria-expanded="false"]').attr('aria-expanded', 'true');
 

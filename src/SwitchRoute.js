@@ -23,6 +23,9 @@ import NodeList from './pages/NodeList';
 import NodeLog from './pages/NodeLog';
 import Error from './pages/Error';
 import Monitor from './pages/Monitor';
+import WriteTx from './pages/WriteTx';
+import ReadTx from './pages/ReadTx';
+import AccountManage from './pages/AccountManage';
 
 export default function SwitchRoute() {
   const header = document.getElementById('Header');
@@ -35,6 +38,15 @@ export default function SwitchRoute() {
     <div className="avc" style={{minHeight: `${bodySize.height - headerSize.height - footerSize.height}px`}}>
       <Switch>
 
+        <Route path="/accountmanage">
+            <AccountManage />
+        </Route>   
+        <Route path="/readtx">
+            <ReadTx />
+        </Route>     
+        <Route path="/writetx">
+            <WriteTx />
+        </Route>  
         <Route path="/monitor">
             <Monitor />
         </Route>  

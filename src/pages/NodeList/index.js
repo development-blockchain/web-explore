@@ -4,7 +4,7 @@ import 'moment/locale/zh-cn';
 import React, { useContext, useEffect, useState } from 'react'; 
 
 
-import ReactApexChart  from "react-apexcharts";
+import Chart   from "react-apexcharts";
 
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
@@ -14,34 +14,55 @@ import Pager4 from '../../components/Pager4';
 import TimeTD from '../../components/TimeTD';
 
 import LinkWithTooltip from '../../components/LinkWithTooltip';
+import './nodelist.css'; 
 
  
-function PieChart({chartData}){ 
+function PieChart({chartData,darkMode}){ 
   if(!chartData?.cpu_info){
     return <></>
   } 
-
-  const cpuInfo = {
+  const color = (darkMode==='true'?'#ffffff':'#324253')  ;
+ const cpuInfo = { 
     series: [chartData.cpu_info.cpu_load.toFixed(2)],
     chart: { 
       id:'apex-cpu',
       type: 'radialBar' 
-    },
-   
-    plotOptions: {
+    },  
+    options: {
       title:{
         text:'CPU使用情况',
         align:'center',
         style: {
           fontSize:  '14px',
-          fontWeight:  'nromal', 
-          color:  '#263238'
+          fontWeight:  'nromal',
+          color:color
         },
       },
-      radialBar: {
-        hollow: {
-          size: '100%',
-        }
+      plotOptions:{
+        radialBar: {
+          hollow: { 
+            margin: 45,
+            size: "55%"
+          }, 
+          dataLabels: {
+            show: true,
+            name: {
+                show: true,
+                fontSize: '14px',  
+                color:color,
+                offsetY: -10
+              },
+              value: {
+                show: true,
+                fontSize: '14px',  
+                color:color,
+                offsetY: 16,
+                formatter: function (val) {
+                  return val + '%'
+                }
+              }
+          }
+        }, 
       },
       labels: ['CPU使用率'],
       colors: [function({ value, seriesIndex, w }) {
@@ -52,10 +73,11 @@ function PieChart({chartData}){
         }else {
           return '#FF4444';
         }
-      }]
-    },
- 
-  };
+      }], 
+    },   
+  };  
+   
+  
   const memInfo = {
     series: [chartData.mem_info.mem_used_percent.toFixed(2)],
     chart: { 
@@ -63,20 +85,41 @@ function PieChart({chartData}){
       type: 'radialBar' 
     },
    
-    plotOptions: {
+    options: {
       title:{
         text:'内存使用情况',
         align:'center',
         style: {
           fontSize:  '14px',
           fontWeight:  'nromal', 
-          color:  '#263238'
+          color:color
         },
       },
-      radialBar: {
-        hollow: {
-          size: '100%',
-        }
+      plotOptions:{
+        radialBar: {
+          hollow: {
+            margin: 45,
+            size: "55%"
+          },
+          dataLabels: {
+            show: true,
+            name: {
+                show: true,
+                fontSize: '14px',  
+                color:color,
+                offsetY: -10
+              },
+              value: {
+                show: true,
+                fontSize: '14px',  
+                color:color,
+                offsetY: 16,
+                formatter: function (val) {
+                  return val + '%'
+                }
+              }
+          }
+        },
       },
       labels: ['内存使用率'],
       colors: [function({ value, seriesIndex, w }) {
@@ -113,7 +156,7 @@ function PieChart({chartData}){
         style: {
           fontSize:  '14px',
           fontWeight:  'nromal', 
-          color:  '#263238'
+          color:color
         },
       },
       xaxis: { categories: restX },
@@ -147,8 +190,8 @@ function PieChart({chartData}){
     }, 
     series: restY 
   };
+ 
 
-   
   return <>
       
       <div className="card-body  p-2"> 
@@ -160,8 +203,8 @@ function PieChart({chartData}){
                   </div>
               </div> */}
               <div className="card-body">
-                  <div id="apex-cpu"></div>
-                  <ReactApexChart   options={cpuInfo.plotOptions}  series={cpuInfo.series}  type={cpuInfo.chart.type}  width="100%"    />
+                  {/* <div id="apex-cpu"></div> */}
+                  <Chart    options={cpuInfo.options}  series={cpuInfo.series}  type={cpuInfo.chart.type}  width="100%"    />
               </div>
             </div> 
             <div className="col-sm-12 col-lg-4">
@@ -171,7 +214,7 @@ function PieChart({chartData}){
                   </div>
               </div> */}
               <div className="card-body">
-                  <ReactApexChart   options={memInfo.plotOptions}  series={memInfo.series}  type={memInfo.chart.type}    width="100%"    />
+                  <Chart   options={memInfo.options}  series={memInfo.series}  type={memInfo.chart.type}    width="100%"    />
               </div>
             </div> 
             <div className="col-sm-12 col-lg-4">
@@ -181,7 +224,7 @@ function PieChart({chartData}){
                   </div>
               </div> */}
               <div className="card-body">
-                <ReactApexChart   options={restInfo.options}  series={restInfo.series}  type={restInfo.chart.type}    width="90%"   />
+                <Chart   options={restInfo.options}  series={restInfo.series}  type={restInfo.chart.type}    width="90%"   />
               </div>
             </div>
           </div>  
@@ -190,7 +233,7 @@ function PieChart({chartData}){
  
 } 
 
-function Node({data}){ 
+function Node({data,darkMode}){ 
   if(!data.cpu_info){
       return <></>
   } 
@@ -207,8 +250,22 @@ function Node({data}){
  
       <div className="col-12 mb-2">
         <div className="row">  
+          <div className="col-lg-3 col-md-6 mt-1 col-lg-3-temp1" >
+            <div className="card mb-1 border-warning">
+              <div className="card-body">
+                <div className="d-flex align-items-center">
+                  <div className="">
+                      <p className="mb-2 text-secondary">最后更新时间</p>
+                      <div className="d-flex flex-wrap justify-content-start align-items-center">
+                        <h5 className="mb-0 font-weight-bold">{updateTime}</h5> 
+                      </div>                            
+                  </div>
+                </div>
+              </div>
+            </div>   
+          </div> 
 
-          <div className="col-lg-3 col-md-6  mt-1">
+          <div className="col-lg-3 col-md-6  mt-1 col-lg-3-temp2">
             <div className="card mb-1 border-danger ">
               <div className="card-body">
                   <div className="d-flex align-items-center">
@@ -223,7 +280,7 @@ function Node({data}){
             </div>   
           </div>
 
-          <div className="col-lg-3 col-md-6  mt-1">
+          <div className="col-lg-3 col-md-6  mt-1 col-lg-3-temp2">
             <div className="card border-primary  mb-1">
               <div className="card-body">
                   <div className="d-flex align-items-center">
@@ -238,7 +295,7 @@ function Node({data}){
             </div>   
           </div>
 
-          <div className="col-lg-3 col-md-6  mt-1">
+          <div className="col-lg-3 col-md-6  mt-1 col-lg-3-temp2">
             <div className="card border-info mb-1">
               <div className="card-body">
                   <div className="d-flex align-items-center">
@@ -255,24 +312,11 @@ function Node({data}){
 
         
 
-          <div className="col-lg-3 col-md-6 mt-1">
-            <div className="card mb-1 border-warning">
-              <div className="card-body">
-                <div className="d-flex align-items-center">
-                  <div className="">
-                      <p className="mb-2 text-secondary">最后更新时间</p>
-                      <div className="d-flex flex-wrap justify-content-start align-items-center">
-                        <h5 className="mb-0 font-weight-bold">{updateTime}</h5> 
-                      </div>                            
-                  </div>
-                </div>
-              </div>
-            </div>   
-          </div> 
+     
         </div>
       </div> 
  
-      <PieChart chartData={data} />     
+      <PieChart chartData={data} darkMode={darkMode}/>     
       <div className="card-header d-md-flex justify-content-between align-items-center  p-1">  
         <h1 className="h6 mb-0">
           节点详情
@@ -294,7 +338,7 @@ function Node({data}){
                                           CPU 数量
                                         </td>
                                         <td>
-                                            {cpu_info.cpu_count}
+                                            {cpu_info?.cpu_count}
                                         </td>
                                     </tr>
                                     <tr className="white-space-no-wrap">
@@ -302,7 +346,7 @@ function Node({data}){
                                             CPU使用百分比
                                         </td>
                                         <td>
-                                        {cpu_info.cpu_load.toFixed(2)}%
+                                        {cpu_info?.cpu_load.toFixed(2)}%
                                         </td>
                                     </tr>
                                     <tr className="white-space-no-wrap">
@@ -310,7 +354,7 @@ function Node({data}){
                                             CPU 进程数
                                         </td>
                                         <td>
-                                            {cpu_info.cpu_process_count}
+                                            {cpu_info?.cpu_process_count}
                                         </td>
                                     </tr> 
                                     <tr className="white-space-no-wrap"> 
@@ -337,7 +381,7 @@ function Node({data}){
                                             总内存
                                         </td>
                                         <td>
-                                        {mem_info.mem_total}
+                                        {mem_info?.mem_total}
                                         </td>
                                     </tr>
                                     <tr className="white-space-no-wrap">
@@ -345,7 +389,7 @@ function Node({data}){
                                             空闲内存
                                         </td>
                                         <td>
-                                        {mem_info.mem_free}
+                                        {mem_info?.mem_free}
                                         </td>
                                     </tr>
                                     <tr className="white-space-no-wrap">
@@ -353,15 +397,15 @@ function Node({data}){
                                             已使用内存
                                         </td>
                                         <td>
-                                        {mem_info.mem_used}
+                                        {mem_info?.mem_used}
                                         </td>
                                     </tr>
                                     <tr className="white-space-no-wrap">
                                         <td className="text-muted pl-0">
                                             使用百分比
                                         </td>
-                                        <td className="text-primary">
-                                        {mem_info.mem_used_percent.toFixed(2)}%
+                                        <td >
+                                        {mem_info?.mem_used_percent.toFixed(2)}%
                                         </td>
                                     </tr>
                                     
@@ -385,7 +429,7 @@ function Node({data}){
                                             是否开始同步
                                         </td>
                                         <td>
-                                            {sync_info.syncing?"是":"否"}
+                                            {sync_info?.syncing?"是":"否"}
                                         </td>
                                     </tr>
                                     <tr className="white-space-no-wrap">
@@ -393,7 +437,7 @@ function Node({data}){
                                             开始区块
                                         </td>
                                         <td>
-                                          {sync_info.start_block}
+                                          {sync_info?.start_block}
                                         </td>
                                     </tr>
                                     <tr className="white-space-no-wrap">
@@ -401,7 +445,7 @@ function Node({data}){
                                             结束区块
                                         </td>
                                         <td>
-                                          {sync_info.end_block}
+                                          {sync_info?.end_block}
                                         </td>
                                     </tr>
                                     <tr className="white-space-no-wrap">
@@ -409,7 +453,7 @@ function Node({data}){
                                             当前区块
                                         </td>
                                         <td className="text-primary">
-                                          {sync_info.cur_block}
+                                          {sync_info?.cur_block}
                                         </td>
                                     </tr> 
                                 </tbody>
@@ -444,7 +488,7 @@ function Node({data}){
                             </thead>
                             <tbody>
                             {
-                                Object.keys(disk_info).map(key => {
+                             disk_info && Object.keys(disk_info).map(key => {
                                   const value = disk_info[key];
                                   return (
                                     <tr key={key}>
@@ -484,7 +528,7 @@ export default function NodeList() {
     provider_pubkey: userContext.user.provider_pubkey || undefined,
     permission: userContext.user.permission || undefined,
   });  
-  
+  const [darkMode, setDarkMode] = useState(localStorage.getItem('dark') ||'false');
   const [nodeList,setNodeList]=useState([])
 
   const [nodeData,setNodeData] =useState({});
@@ -497,7 +541,7 @@ export default function NodeList() {
     nodeListRequest.run().then(res=>{ 
       setNodeList(res.data);
       if(res.data.length>0){
-        setCurrentTab(res.data[0].node_name);
+        // setCurrentTab(res.data[0].node_name);
         setNodeData(res.data[0]);
       }
     }); 
@@ -512,7 +556,10 @@ export default function NodeList() {
     }),
     {manual: true, formatResult: r => r},
   );
- 
+  const getStorage = () => {
+    const item =localStorage.getItem('dark') ?? 'true'; 
+    setDarkMode(item);
+  };
   useEffect(() => { 
       nodeListRequest.run().then(res=>{ 
         setNodeList(res.data);
@@ -521,6 +568,13 @@ export default function NodeList() {
           setNodeData(res.data[0]);
         }
       }); 
+
+      
+    window.addEventListener('storage', getStorage); 
+    return () => {
+      window.removeEventListener('storage', getStorage);
+    };
+
   }, []);
  
  
@@ -534,35 +588,36 @@ export default function NodeList() {
 
   return (
     <main id="content" role="main"> 
-      <div className="container-fluid space-bottom-2  p-3">
+      <div className="container-fluid space-bottom-2  p-3" style={{overflow:'hidden'}}>
         <div className="card">
           <div className="header-title"> 
-            <div className="d-flex justify-content-between align-items-center p-3">
-                <h5 className="font-weight-bold">节点详情</h5> 
-                <button className="btn btn-info btn-sm"  onClick={e=>refreshData(e)}>
+            <div className="d-flex justify-content-between align-items-center">
+                <h4 className="card-title p-2">节点详情&nbsp;</h4> 
+                <button className="btn btn-primary btn-sm mr-2"  onClick={e=>refreshData(e)}>
                   <svg xmlns="http://www.w3.org/2000/svg" height="20"  fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                   </svg> 
                   刷新
                 </button>
             </div>  
-          </div>
+          </div> 
+
           <div className="p-1">
-            <div className="row"> 
+            <div className="row">  
               <div className="col-sm-2">
-                <div className="nav flex-column nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    {nodeList.filter(Boolean).map(node => {
-                      return (
-                        <a  className={`nav-link ${node.node_name === currentTab ? 'active' : ''}`} id={node.node_name} key={node.node_name} data-toggle="pill" href={`#${node.node_name}`} role="tab"
+                 <div className="list-group list-group-lg mb-3">
+                   {nodeList.filter(Boolean).map(node => {
+                      return ( 
+                        <a  className={`list-group-item list-group-item-action ${node.node_name === currentTab ? 'active' : ''}`} id={node.node_name} key={node.node_name} data-toggle="pill" href={`#${node.node_name}`} role="tab"
                             onClick={() => {  setCurrentTab(node.node_name);  setNodeData(node);  }} > {node.node_name}</a> 
                       );
-                    })}      
-                </div>
+                    })}    
+                  </div>  
               </div>
               <div className="col-sm-10">
                 <div className="tab-content mt-0" id="v-pills-tabContent">
                   <div className="tab-pane fade show active"  role="tabpanel" aria-labelledby="v-pills-home-tab">
-                    <Node data={nodeData} />     
+                    <Node data={nodeData} darkMode={darkMode} />     
                   </div>
                 </div>
               </div> 

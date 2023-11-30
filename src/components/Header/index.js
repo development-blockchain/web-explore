@@ -239,29 +239,24 @@ export default function Header() {
                         {token ? 
                               <ul className="navbar-nav ml-auto navbar-list align-items-center"> 
                                 <li className="nav-item nav-icon dropdown">
-                                    <a href="#!" className="nav-item nav-icon dropdown-toggle pr-0 search-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                    <a href="#!" className="nav-item nav-icon dropdown-toggle pr-0 search-toggle" id="dropdownMenuButton" data-toggle="dropdown"   >
                                         <svg   className="svg-icon mr-0 text-secondary" viewBox="0 0 1024 1024" width="40" height="40" xmlns="http://www.w3.org/2000/svg" >
-                                          <path d="M510.7 509.5m-400.3 0a400.3 400.3 0 1 0 800.6 0 400.3 400.3 0 1 0-800.6 0Z" fill="#1296db" p-id="12021"></path><path d="M748.1 727c-9.6-48.3-32-92.8-65.4-128.6-31.3-33.6-69.8-56.9-111.7-68.3 53.5-23.4 91-76.8 91-138.8 0-83.4-67.9-151.3-151.3-151.3s-151.3 67.9-151.3 151.3c0 62 37.5 115.4 91 138.8-41.9 11.4-80.4 34.7-111.7 68.3-33.4 35.8-55.8 80.2-65.4 128.6-0.9 4.7 0.5 9.6 3.8 13.1l0.3 0.3c8.3 8.7 23 4.5 25.4-7.3 20.6-103.3 106.1-180.9 208-180.9 102 0 187.4 77.6 208 180.9 2.4 11.8 17.1 16.1 25.4 7.3l0.3-0.3c3.1-3.6 4.6-8.4 3.6-13.1zM389.3 391.4c0-66.9 54.4-121.3 121.3-121.3s121.3 54.4 121.3 121.3-54.4 121.3-121.3 121.3c-66.8 0-121.3-54.4-121.3-121.3z" fill="#ffffff" p-id="12022"></path>
+                                          <path d="M510.7 509.5m-400.3 0a400.3 400.3 0 1 0 800.6 0 400.3 400.3 0 1 0-800.6 0Z" fill="#3378ff"></path><path d="M748.1 727c-9.6-48.3-32-92.8-65.4-128.6-31.3-33.6-69.8-56.9-111.7-68.3 53.5-23.4 91-76.8 91-138.8 0-83.4-67.9-151.3-151.3-151.3s-151.3 67.9-151.3 151.3c0 62 37.5 115.4 91 138.8-41.9 11.4-80.4 34.7-111.7 68.3-33.4 35.8-55.8 80.2-65.4 128.6-0.9 4.7 0.5 9.6 3.8 13.1l0.3 0.3c8.3 8.7 23 4.5 25.4-7.3 20.6-103.3 106.1-180.9 208-180.9 102 0 187.4 77.6 208 180.9 2.4 11.8 17.1 16.1 25.4 7.3l0.3-0.3c3.1-3.6 4.6-8.4 3.6-13.1zM389.3 391.4c0-66.9 54.4-121.3 121.3-121.3s121.3 54.4 121.3 121.3-54.4 121.3-121.3 121.3c-66.8 0-121.3-54.4-121.3-121.3z" fill="#ffffff" p-id="12022"></path>
                                         </svg>
                                         <span className="mb-0 ml-2 user-name">{user.email}</span>
                                     </a>
-                                    <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <li className="dropdown-item d-flex svg-icon">
-                                          <svg  className="svg-icon mr-0 text-secondary" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7687" width="20" height="20">
-                                            <path d="M635.2 776.768c-5.12 17.536-8.96 36.544-15.36 52.672 0-8.768 6.4-16.832 8.96-24.896a40.64 40.64 0 0 0 0-8.768c1.28-5.824 4.48-12.096 6.4-19.008z m0 0v-11.328c1.92 3.648 0.64 7.68 0 11.328z" fill="#64676F" p-id="7688"></path>
-                                            <path d="M502.016 469.248a202.112 202.112 0 1 1 0-404.224 202.112 202.112 0 0 1 0 404.224z" fill="#94A8C2" p-id="7689"></path>
-                                            <path d="M572.16 715.008a225.28 225.28 0 0 1 81.024-106.624 219.2 219.2 0 0 1 167.552-35.968 423.232 423.232 0 0 0-162.56-117.632c-37.888 35.2-86.336 56.96-137.792 61.824h-0.64a232.192 232.192 0 0 1-4.608 0.384l-0.96 0.064a200.768 200.768 0 0 1-4.288 0.256l-1.152 0.064-4.288 0.128h-1.088a234.56 234.56 0 0 1-10.624 0h-1.088l-4.288-0.128h-1.152a201.728 201.728 0 0 1-4.288-0.32h-0.96a238.528 238.528 0 0 1-4.608-0.448h-0.64a234.688 234.688 0 0 1-137.792-61.824c-104.064 42.432-184.128 162.688-240.32 360.704a64 64 0 0 0 61.44 81.408l197.696 0.64v0.768l141.312-0.384 91.072 0.256c-31.36-54.912-38.848-123.008-16.96-183.168z" fill="#94A8C2" p-id="7690"></path>
-                                            <path d="M779.328 617.6a170.688 170.688 0 1 0 0 341.376 170.688 170.688 0 0 0 0-341.376z m113.6 133.568l-12.48 13.632-86.656 95.104c-9.152 10.112-24.512 8.256-33.92 0l-8.96-7.808-62.08-54.464c-10.112-8.832-8.32-24.896 0-33.92 9.152-10.048 24.512-8.32 33.92 0l8.96 7.808 43.264 37.888 84.032-92.16c8.96-9.92 24.704-8.512 33.92 0 9.856 8.96 8.448 24.64 0 33.92z" fill="#94A8C2" p-id="7691"></path>
-                                          </svg>
-                                            <span style={{padding:'0 10px'}}>{user.permission===1?'普通用户':'管理员'}</span> 
-                                        </li> 
-                                        <li className="dropdown-item  d-flex svg-icon border-top">
+                                    <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"> 
+                                        <li className="dropdown-item  d-flex svg-icon">
                                             <svg className="svg-icon mr-0 text-secondary" id="h-05-p" width="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                             </svg>
                                             <a href="/login?cmd=logout">退出登录</a>
                                         </li>
                                     </ul>
+                                </li> 
+                                <li className="nav-item nav-icon dropdown pl-1 "> 
+                                {user.permission===1? <span className=' u-label  u-label--sm  u-label--success rounded' style={{padding:'0 10px;'}}>普通用户</span> 
+                                :<span className='u-label  u-label--sm  u-label--info rounded'  style={{padding:'0 10px'}}>管理员</span> }
                                 </li> 
                               </ul> 
                             :

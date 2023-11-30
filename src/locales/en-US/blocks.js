@@ -6,6 +6,8 @@ const blocks = {
     'blocks.table.BlockTime': 'BlockTime', 
     'blocks.table.age': 'Age',
     'blocks.table.time': 'Date Time (UTC)',
+    'blocks.table.leader': 'leader',
+    'blocks.table.view': 'view',
     'blocks.tip1': 'Block ',
     'blocks.tip2': ' to',
     'blocks.tip3': 'Total of ',

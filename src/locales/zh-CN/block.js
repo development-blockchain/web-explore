@@ -27,6 +27,8 @@ const block = {
     'block.Nonce': '随机数',  
     'block.Overview.ClicktoseeLess': '点击查看较少',
     'block.Overview.ClicktoseeMore': '点击查看更多',
+    'block.leader': '出块节点',
+    'block.view': '视图',
 
 };
 

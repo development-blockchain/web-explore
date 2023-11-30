@@ -1,4 +1,6 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState,useContext} from 'react';
+
+import UserContext from '../../UserContext';
 import {useRequest} from 'ahooks';
 import {useParams,Link} from 'react-router-dom';
 import moment from 'moment'; 
@@ -42,14 +44,7 @@ function Detail({data = {}, block, loading, error}) {
           <div className="row align-items-center  mt-1">
             <div className="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
               <i
-                className="fal fa-question-circle text-secondary mr-1"
-                data-container="body"
-                data-toggle="popover"
-                data-placement="top"
-                data-original-title=""
-                title=""
-                data-content="Also known as Block Number. The block height, which indicates the length of the blockchain, increases after the addition of the new block."
-              ></i>
+                className="fal fa-info-circle text-secondary mr-1" ></i>
               {t('block.BlockHeight')}:
             </div>
             <div className="col-md-9">
@@ -61,14 +56,7 @@ function Detail({data = {}, block, loading, error}) {
           <hr className="hr-space" />
           <div className="row align-items-center  mt-1">
             <div className="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
-              <i  className="fal fa-question-circle text-secondary mr-1"
-                data-container="body"
-                data-toggle="popover"
-                data-placement="top"
-                data-original-title=""
-                title=""
-                data-content="Also known as Block Number. The block height, which indicates the length of the blockchain, increases after the addition of the new block."
-              ></i>
+              <i  className="fal fa-info-circle text-secondary mr-1"></i>
               {t('block.BlockHash')}:
             </div>
             <div className="col-md-9">
@@ -81,7 +69,7 @@ function Detail({data = {}, block, loading, error}) {
           <hr className="hr-space" />
           <div className="row align-items-center">
             <div className="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
-              <i className="fal fa-question-circle text-secondary mr-1" ></i>
+              <i className="fal fa-info-circle text-secondary mr-1" ></i>
                {t('block.Timestamp')}:
             </div>
             <div className="col-md-9">
@@ -94,18 +82,33 @@ function Detail({data = {}, block, loading, error}) {
           <div className="row align-items-center">
             <div className="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
               <i
-                className="fal fa-question-circle text-secondary mr-1"
-                data-container="body"
-                data-toggle="popover"
-                data-placement="top"
-                data-original-title=""
-                title=""
-                data-content="For each block, the miner is rewarded with a finite amount of HPB on top of the fees paid for all transactions in the block."
-              ></i>
+                className="fal fa-info-circle text-secondary mr-1"></i>
               {t('block.TxCount')}:
             </div>
             <div className="col-md-9">{tx_counts}</div>
           </div> 
+          <hr className="hr-space" />
+          <div className="row align-items-center  mt-1">
+            <div className="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
+              <i  className="fal fa-info-circle text-secondary mr-1" ></i>
+              {t('block.leader')}:
+            </div>
+            <div className="col-md-9">
+              <div className="d-flex">
+                <span className="font-weight-sm-bold mr-2">{data.leader}</span> 
+                <Copy text={data.leader} title="Copy Txn Hash to clipboard" />
+              </div>
+            </div>
+          </div>
+          <hr className="hr-space" />
+          <div className="row align-items-center  mt-1">
+            <div className="col-md-3 font-weight-bold font-weight-sm-normal mb-1 mb-md-0e">
+              <i  className="fal fa-info-circle text-secondary mr-1"></i>
+              {t('block.view')}:
+            </div>
+            <div className="col-md-9">{data.view}</div>
+          </div> 
+
         </div>
       </div>
     </div>
@@ -113,6 +116,17 @@ function Detail({data = {}, block, loading, error}) {
 }
 
 export default function Block() {
+  const userContext = useContext(UserContext); 
+  const [user, setUser] = useState({
+    token: userContext.user.token || undefined,
+    email:userContext.user.email || undefined,
+    key: userContext.user.key || undefined,
+    publicKey: userContext.user.publicKey || undefined,
+    provider_username: userContext.user.provider_username || undefined,
+    provider_pubkey: userContext.user.provider_pubkey || undefined,
+  }); 
+
+
   let {block} = useParams();
   
   block = decodeURIComponent(block);
@@ -129,6 +143,9 @@ export default function Block() {
     body => ({
       url: '/chainBrowser/blockchain/getBlockByHashOrId',
       method: 'post',
+      headers: {
+        'Authorization': user.token,
+      },
       body: JSON.stringify(body),
     }),
     {manual: true},

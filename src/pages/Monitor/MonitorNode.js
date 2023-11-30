@@ -369,7 +369,7 @@ export default function MonitorKafa() {
                 <table className="table data-table table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th scope="col">Id</th>
+                      <th scope="col">编号</th>
                       <th scope="col">标签名称</th>
                       <th scope="col">节点地址</th>
                       <th scope="col">创建时间</th>

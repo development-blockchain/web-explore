@@ -72,7 +72,23 @@ export default function Blocks() {
     if(params.value ===''){
       params.field ='';
     }
-    setState({...state, body: {...state.body,...params,"start":"1"}});
+
+    if(params.value !=='' && params.field ===''){
+
+      if (String(Number(params.value)) === params.value) {
+        //区块高度 
+        setState({...state, body: {...state.body, ...params,"start":"1","field":'block_id'}});
+      } 
+      else if(params.value.length===44){
+        //区块哈希 
+        setState({...state, body: {...state.body, ...params,"start":"1","field": 'block_hash'}});
+      }
+    }else{
+      setState({...state, body: {...state.body,...params,"start":"1"}});
+    }
+
+
+  
    
   }
   const blocksRequest = useRequest(
@@ -118,15 +134,15 @@ export default function Blocks() {
               </p>
               <div className="mr-3">
                 <div className="input-group input-group-shadow">
-                  <div className="input-group-prepend d-md-block mr-2" >
-                  <select id="selectKey" className="form-control form-control-sm mb-3 "   onChange={e=>handleSelectField(e)} value={params.field}>
+                 {/* <div className="input-group-prepend d-md-block mr-2" >
+                   <select id="selectKey" className="form-control form-control-sm mb-3 "   onChange={e=>handleSelectField(e)} value={params.field}>
                           <option value="" >请选择关键字</option>
                           <option value="block_id">区块高度</option>
                           <option value="block_hash">区块哈希</option> 
                       </select> 
-                  </div>
-                  <input type="text" className="form-control form-control-sm mr-2" id="keywrokds"  placeholder="请输入关键字" 
-                   value={params.value} onChange={e=>handleChangeValue(e)}  /> 
+                  </div> */}
+                  <input type="text" className="form-control form-control-sm mr-2" id="keywrokds"  placeholder="请输入区块高度/区块哈希" 
+                  style={{width:'220px'}} value={params.value} onChange={e=>handleChangeValue(e)}  /> 
                   <div className="">
                     <button type="button" className="btn btn-primary btn-sm" onClick={e=>queryData(e)}>搜索</button>
                   </div>
@@ -159,6 +175,8 @@ export default function Blocks() {
                         </div>
                     </th> 
                     <th> {t('blocks.table.TxNum')}</th>
+                    <th> {t('blocks.table.leader')}</th>
+                    <th> {t('blocks.table.view')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -182,6 +200,10 @@ export default function Blocks() {
                         <TimeTD time={item.timestamp} interval={item.interval_timestamp} type={type} />
 
                         <td className='td_normal'>{item.tx_counts }</td>
+                        <td className='td_normal hash-tag text-truncate' style={{maxWidth:'250px'}}>
+                          <span title={item.leader }>{item.leader }</span>  
+                        </td>
+                        <td className='td_normal'>{item.view }</td>
                       </tr>
                     );
                   }):

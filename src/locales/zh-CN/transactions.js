@@ -12,6 +12,7 @@ const transactions = {
     'transactions.table.TxIndex': '交易索引',  
     'transactions.table.AdminReqType': '请求类型',  
     'transactions.table.ChainUserId': '链上用户',   
+    'transactions.table.operate': '操作', 
     'transactions.tip1': '找到超过 ',
     'transactions.tip2': '个交易 ',
     'transactions.tip3': '仅显示最后的',

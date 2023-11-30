@@ -46,6 +46,7 @@ const home = {
     'home.Transactions': 'Transactions',
     'home.Nodes': 'Nodes',
     'home.ChainCodes': 'ChainCodes',
+    'home.LinkUsers': 'Onchain Users',
   
 
 };

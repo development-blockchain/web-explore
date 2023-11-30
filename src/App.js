@@ -30,6 +30,8 @@ function App() {
     provider_username:chainUser.provider_username|| undefined,
     provider_pubkey:chainUser.provider_pubkey  || undefined,
     permission:chainUser.permission  || undefined,
+    user_id:chainUser.user_id  || undefined,
+    tdh2_pubkey:chainUser.tdh2_pubkey  || undefined,
   });
  
   const userInfoRequest = useRequest(

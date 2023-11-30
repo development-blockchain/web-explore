@@ -56,4 +56,3 @@ yarn build
 把 `build` 目录copy到服务器 `nginx` 服务根目录，例如： `/var/www`
 
 
-# web-explore

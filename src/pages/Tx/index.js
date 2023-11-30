@@ -1,5 +1,6 @@
 import { useRequest } from 'ahooks';
 import moment from 'moment';
+import 'moment/locale/zh-cn';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useParams } from 'react-router-dom';
@@ -77,13 +78,19 @@ function TxType({data}) {
             <i className="fa fa-check-circle mr-1"></i>Admin交易
           </span>
         </div>
-      ) : (
+      ) : (data.tx_type===14? (
+        <div className="col col-md-9">
+          <span  className="u-label u-label--sm u-label--warning rounded"   >
+            <i className="fa fa-check-circle mr-1"></i>合约交易 
+          </span>
+        </div>
+      ): (
         <div className="col col-md-9">
           <span  className="u-label u-label--sm u-label--info rounded"   >
             <i className="fa fa-check-circle mr-1"></i>普通交易 
           </span>
         </div>
-      )}
+      ))}
     </div>
   );
 }
@@ -102,7 +109,7 @@ function TxWType({data}) {
           title=""
           data-content="The status of the transaction."
         ></i>
-        Write Type:
+         上链模式:
       </div>
      
       <div className="col col-md-9">
@@ -144,8 +151,7 @@ function BlockNo({data}) {
 function TimeStamp({data}) {
   const {t} = useTranslation(['tx']);
     // 设置中文
-  const defaultLNG = window.localStorage.getItem('lng') || 'en_US';
-  moment.locale(defaultLNG);
+ 
   const now = new Date().getTime();
   const timeInterval = moment(now - Number(data.interval_timestamp) * 1000)
     .startOf('minute')
@@ -229,11 +235,11 @@ function Empty({tx}) {
     <div className="card-body">
       <div className="space-2 text-center">
         <img className="mb-5-alt darkmode" width="150" src="/assets/svg/empty-states/empty-search-state-dark.svg" alt="Search Not Found" />
-        <img className="mb-5-alt normalMode" width="150" src="/assets/svg/empty-states/empty-search-state.svg" alt="Search Not Found" />
+        {/* <img className="mb-5-alt normalMode" width="150" src="/assets/svg/empty-states/empty-search-state.svg" alt="Search Not Found" /> */}
         <p className="lead mb-0">
-          {t('tx.empty.tip1')}:&nbsp;
+          {t('tx.empty.tip1')} 
           <br />
-          <i>{tx}</i>
+          {/* <i>{tx}</i> */}
         </p>
       </div>
     </div>
@@ -251,6 +257,10 @@ export default function Tx() {
     provider_username: userContext.user.provider_username || undefined,
     provider_pubkey: userContext.user.provider_pubkey || undefined,
   }); 
+  
+  const defaultLNG = window.localStorage.getItem('lng') || 'zh_CN';
+  moment.locale(defaultLNG); 
+
 
   const {t} = useTranslation(['tx']);
   let {tx} = useParams();
@@ -276,8 +286,11 @@ export default function Tx() {
   );
 
   useEffect(() => {
-    tradeDetailRequest.run(state.tradeDetailBody).then(res => {
+    tradeDetailRequest.run(state.tradeDetailBody).then(res => { 
       if (res) {
+        // if(res.code ===10097){
+        //   prompt.error('无权限查看当前交易',false);
+        // }
         setTradeDetail(res);
       }
     });

@@ -29,8 +29,12 @@ function sign(msg, privateKey){
     return sm2.doSignature(msg, privateKey, {hash:true} )
 }
 
+function sign2(msg, privateKey){
+    return sm2.doSignature(msg, privateKey, {hash:true} )
+}
+
 function verify(msg, sigValueHex, publicKey){
     return sm2.doVerifySignature(msg, sigValueHex, publicKey ,{hash:true} )
 }
 
-module.exports = {keygen, encrypt, decrypt, sign, verify, recover}
+module.exports = {keygen, encrypt, decrypt, sign,sign2, verify, recover}

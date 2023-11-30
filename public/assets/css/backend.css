@@ -23591,7 +23591,9 @@ button.close-popup {
 .dark .list-group-item {
 	background: #181818;
 }
-
+.dark .list-group-item-action{
+	color:#fff;
+}
 .dark .blockquote-footer,.dark pre {
 	color: #eff0f1;
 }
@@ -25318,7 +25320,7 @@ body.iq-hotel .iq-sidebar-menu .side-menu li.active>a {
     box-shadow: 0 0 0 .2rem hsla(216,7%,85%,.5)
 }
 
-.btn-primary[href]:active,.btn-primary[href]:focus,.btn-primary[href]:hover,.btn-primary[type]:active,.btn-primary[type]:focus,.btn-primary[type]:hover {
+/* .btn-primary[href]:active,.btn-primary[href]:focus,.btn-primary[href]:hover,.btn-primary[type]:active,.btn-primary[type]:focus,.btn-primary[type]:hover {
     box-shadow: 0 4px 11px rgba(52,152,219,.35)
 }
 
@@ -25326,7 +25328,7 @@ body.iq-hotel .iq-sidebar-menu .side-menu li.active>a {
     background-color: #3498db;
     border-color: #3498db
 }
-
+ */
 .btn-secondary[href]:active,.btn-secondary[href]:focus,.btn-secondary[href]:hover,.btn-secondary[type]:active,.btn-secondary[type]:focus,.btn-secondary[type]:hover {
     box-shadow: 0 4px 11px rgba(119,131,143,.35)
 }

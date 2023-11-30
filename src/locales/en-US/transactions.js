@@ -11,6 +11,7 @@ const transactions = {
     'transactions.table.TxIndex': 'TxIndex',  
     'transactions.table.AdminReqType': 'AdminReqType',  
     'transactions.table.ChainUserId': 'Chain User',  
+    'transactions.table.operate': 'Action',  
     'transactions.tip1': 'More than ',
     'transactions.tip2': 'transactions found ',
     'transactions.tip3': 'Showing the last ',

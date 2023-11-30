@@ -82,8 +82,21 @@ export default function LeftMenu({user}) {
                                             <span className="ml-2">交易列表</span>
                                         </Link>
                                     </li>
+                                    {(user.token &&user.permission===2)?
                                     <li className=" sidebar-layout">
-                                        <Link to='/#' className="svg-icon">
+                                        <Link to='/accountmanage' className="svg-icon">
+                                            <i className="">
+                                                <svg className="svg-icon" width="18" id="iq-user-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                                </svg>
+                                            </i>
+                                            <span className="ml-2">账户管理</span>
+                                        </Link> 
+                                    </li>:""
+                                    }
+
+                                    <li className=" sidebar-layout">
+                                        <Link to='/readtx' className="svg-icon">
                                             <i className="">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
@@ -93,7 +106,7 @@ export default function LeftMenu({user}) {
                                         </Link>
                                     </li>
                                     <li className=" sidebar-layout">
-                                        <Link to='/#' className="svg-icon">
+                                        <Link to='/writetx' className="svg-icon">
                                             <i className="">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
@@ -120,7 +133,7 @@ export default function LeftMenu({user}) {
                      ""
                     }
                     {
-                    (user.token &&user.permission===1)?
+                    (user.token &&user.permission===2)?
                         <>
                           <li className="sidebar-layout">
                                 <a href="#monitorLog" className="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">

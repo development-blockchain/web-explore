@@ -28,7 +28,7 @@ export default function Monitor() {
     },  
     {
         key: 'monitorKafa',
-        title: "监控KaFa"
+        title: "监控Kafka"
     }
   ];
 
@@ -45,7 +45,7 @@ export default function Monitor() {
           </div> 
           <div className="card p-1"> 
               <div className="card-header d-flex justify-content-between align-items-center p-0">
-                <ul className="nav nav-custom nav-borderless nav_tabs1" role="tablist"> 
+                <ul className="nav nav-tabs" role="tablist"> 
                     {contractTabsConst.filter(Boolean).map(tab => {
                         return (
                         <li className="nav-item" key={tab.key}>

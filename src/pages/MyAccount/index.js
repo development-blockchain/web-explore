@@ -200,11 +200,11 @@ function ModifySecretKey({user}){
     <div className="col-md-12">
       <div className="card mb-4"> 
         <div className="card-header d-flex justify-content-between align-items-center">
-          <h3 className="h5 text-dark mb-0">更换密钥</h3>
+          <h3 className="h5   mb-0">更换密钥</h3>
         </div> 
         <div className="card-body">
 
-          <p className="text-dark mb-4">请生成密钥</p> 
+          <p className="mb-4">请生成密钥</p> 
 
           <div className="row align-items-baseline  mb-2">
             <div className={`col-md-12 js-form-message form-group ${errors.publicKey ? 'u-has-error' : ''}`}>
@@ -418,11 +418,11 @@ function ModifyPassword({user}){
       <div className="col-md-12">
         <div className="card mb-4"> 
           <div className="card-header d-flex justify-content-between align-items-center">
-            <h3 className="h5 text-dark mb-0">修改密码</h3>
+            <h3 className="h5  mb-0">修改密码</h3>
           </div> 
           <div className="card-body">
 
-            <p className="text-dark mb-4">请输入以下信息进行密码修改</p> 
+            <p className="mb-4">请输入以下信息进行密码修改</p> 
 
             <div className="row align-items-baseline  mb-2">
                 <div className="col-md-3 mb-1 mb-md-0">
@@ -604,10 +604,10 @@ function Account({user}){
       <div className="col-md-12">
         <div className="card mb-4"> 
           <div className="card-header d-flex justify-content-between align-items-center">
-            <h3 className="h5 text-dark mb-0">账户信息</h3>
+            <h3 className="h5   mb-0">账户信息</h3>
           </div> 
           <div className="card-body"> 
-            <p className="text-dark mb-4">以下是您的邮箱信息以及其他信息.</p>  
+            <p className=" mb-4">以下是您的邮箱信息以及其他信息.</p>  
             <div className="row align-items-baseline">
                 <div className="col-md-4 mb-1 mb-md-0">
                   <i className="fal fa-envelope fa-fw text-secondary mr-1"></i> 您的邮箱:
@@ -634,14 +634,14 @@ function Account({user}){
         <div className="card">
 
           <div className="card-header d-flex justify-content-between align-items-center">
-            <h3 className="h5 text-dark mb-0">密钥信息</h3> 
+            <h3 className="h5  mb-0">密钥信息</h3> 
 
 
             <a href="!#" className="ml-3"     data-toggle="modal"  onClick={e=>{ e.preventDefault();     setShowDialog(true);}}  >查看私钥明文</a>   
           </div>
 
           <div className="card-body">
-            <p className="text-dark mb-4">以下是您的密钥信息</p>
+            <p className=" mb-4">以下是您的密钥信息</p>
 
             <div className="row align-items-center">
               <div className="col-md-4 mb-1 mb-md-0">

@@ -45,8 +45,8 @@ const home = {
     'home.Blocks': '区块数',
     'home.Transactions': '交易数',
     'home.Nodes': '节点数',
-    'home.ChainCodes': '链码数',
-
+    'home.ChainCodes': '链码数', 
+    'home.LinkUsers': '链上用户数',
 };
 
 export default home;

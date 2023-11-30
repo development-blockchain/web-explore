@@ -230,6 +230,7 @@ function UserLogin(){
           loginRequest.run({...forLogin}).then(resLogin => { 
               console.log('resLogin',resLogin);
               if(resLogin.code ===0){
+                debugger
                   window.localStorage.setItem('token', resLogin.data.token);  
                   const userInfo = {
                     email:form.userName,
@@ -238,6 +239,8 @@ function UserLogin(){
                     provider_username:provider_username,
                     provider_pubkey:provider_pubkey, 
                     permission:resLogin.data.permission,
+                    user_id :resLogin.data.user_id ,
+                    tdh2_pubkey:resLogin.data.tdh2_pubkey
                   }
                   window.localStorage.setItem('chain_user',JSON.stringify(userInfo)); 
 
@@ -304,8 +307,7 @@ function UserLogin(){
                                       </button>  
                                   </div>
                                   
-                                  <input  id="txtUserName" type="text"   maxLength="50"
-                                      tabIndex="1" className="form-control "   required=""    data-error-class="u-has-error"
+                                  <input  id="txtUserName" type="text"   maxLength="50"  tabIndex="1" className="form-control "   data-error-class="u-has-error"
                                       data-success-class="u-has-success"   placeholder={t('login.userlogin.Username')}  data-msg="Username is required."
                                       value={form.userName}  onChange={handleForm('userName')}  onBlur={handleBlur('userName')}        />
                                    
@@ -324,10 +326,8 @@ function UserLogin(){
                                           </div> 
                                       </Modal.Body>
                                       <Modal.Footer>
-                                          <input type="file" id="txtFile" accept=".pem" style={{display:'none'}}
-                                                onClick={(event)=> { event.target.value = null }}  onChange={e=>{handleTxtChange(e)}} />
-                                              <input type="file" id="pngFile" accept=".png"  style={{display:'none'}} 
-                                              onClick={(event)=> { event.target.value = null }}  onChange={e=>{handlePngChange(e)}} />
+                                          <input type="file" id="txtFile" accept=".pem" style={{display:'none'}}   onClick={(event)=> { event.target.value = null }}  onChange={e=>{handleTxtChange(e)}} />
+                                          <input type="file" id="pngFile" accept=".png"  style={{display:'none'}}  onClick={(event)=> { event.target.value = null }}  onChange={e=>{handlePngChange(e)}} />
 
                                           <button type="button" className="btn btn-sm btn-danger" onClick={e=>{e.preventDefault();setShow(false);}}>关闭</button>
                                           <button type="button" className="btn btn-sm btn-warning" onClick={e=>clearPrivateKey()}>清空密钥</button>
@@ -344,8 +344,8 @@ function UserLogin(){
                               <div className="form-group">
                                 <div className="d-flex justify-content-between align-items-center">
                                       <label className="text-danger font-weight-bold">密钥</label>  
-                                  </div> 
-                                  <input  type="password"  disabled={true} tabIndex="1" className="form-control "    value={privateKey}  />
+                                </div> 
+                                <input  type="password"  disabled={true} tabIndex="1" className="form-control "    value={privateKey}  />
                               </div>
                             </div>
 

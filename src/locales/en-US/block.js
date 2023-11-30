@@ -27,6 +27,8 @@ const block = {
     'block.Nonce': 'Nonce', 
     'block.Overview.ClicktoseeLess': 'Click to see Less',
     'block.Overview.ClicktoseeMore': 'Click to see More',
+    'block.leader': 'leader',
+    'block.view': 'view',
 
 };
 

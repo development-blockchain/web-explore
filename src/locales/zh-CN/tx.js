@@ -57,7 +57,7 @@ const tx = {
     'tx.Overview.InternalTradeDetail.table.GasLimit': '燃料限制', 
 
 
-    'tx.empty.tip1': '哎呀! 输入了无效的交易哈希',
+    'tx.empty.tip1': '您无权限查看当前交易',
 
 };
 

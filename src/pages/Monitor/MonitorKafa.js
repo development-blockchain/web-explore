@@ -222,20 +222,20 @@ export default function MonitorKafa({address, overview}) {
         <div className="col-lg-12">
           <div className="card-block card-stretch"> 
               <div className="d-flex justify-content-between align-items-center p-3">
-                  <h5 className="font-weight-bold">监控Kafa列表</h5>
+                  <h5 className="font-weight-bold">监控Kafka列表</h5>
                   <a href="#!"  onClick={e=>{ addNode(e) }} 
                     className="btn btn-sm btn-primary position-relative d-flex align-items-center justify-content-between">
                     <svg xmlns="http://www.w3.org/2000/svg" className="mr-2" width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
-                    增加监控Kafa
+                    增加监控Kafka
                   </a>
               </div>
               <div className="table-responsive">
                 <table className="table data-table table-striped table-bordered">
                   <thead>
                     <tr>       
-                      <th scope="col">Id</th>
+                      <th scope="col">编号</th>
                       <th scope="col">标签名称</th>
                       <th scope="col">Brokers</th>
                       <th scope="col">Topic</th>
