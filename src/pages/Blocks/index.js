@@ -200,8 +200,8 @@ export default function Blocks() {
                         <TimeTD time={item.timestamp} interval={item.interval_timestamp} type={type} />
 
                         <td className='td_normal'>{item.tx_counts }</td>
-                        <td className='td_normal hash-tag text-truncate' style={{maxWidth:'250px'}}>
-                          <span title={item.leader }>{item.leader }</span>  
+                        <td className='td_normal '>
+                          <span className='hash-tag text-truncate' title={item.leader }>{item.leader }</span>
                         </td>
                         <td className='td_normal'>{item.view }</td>
                       </tr>

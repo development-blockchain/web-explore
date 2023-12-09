@@ -198,7 +198,6 @@ function ModifySecretKey({user}){
 
   return (  
     <div className="col-md-12">
-      <div className="card mb-4"> 
         <div className="card-header d-flex justify-content-between align-items-center">
           <h3 className="h5   mb-0">更换密钥</h3>
         </div> 
@@ -282,7 +281,6 @@ function ModifySecretKey({user}){
           </div> 
 
         </div>
-      </div>  
       <Toast/>  
     </div> 
   );
@@ -414,9 +412,8 @@ function ModifyPassword({user}){
 
   return (
 
-    <div className="row"> 
+
       <div className="col-md-12">
-        <div className="card mb-4"> 
           <div className="card-header d-flex justify-content-between align-items-center">
             <h3 className="h5  mb-0">修改密码</h3>
           </div> 
@@ -475,10 +472,9 @@ function ModifyPassword({user}){
                 </button>
             </div> 
           </div>
-        </div>   
+          <Toast/> 
       </div>
-      <Toast/>
-    </div> 
+   
   );
 
 }
@@ -600,48 +596,43 @@ function Account({user}){
 
 
   return ( 
-    <div className="row">
       <div className="col-md-12">
-        <div className="card mb-4"> 
-          <div className="card-header d-flex justify-content-between align-items-center">
-            <h3 className="h5   mb-0">账户信息</h3>
-          </div> 
-          <div className="card-body"> 
-            <p className=" mb-4">以下是您的邮箱信息以及其他信息.</p>  
-            <div className="row align-items-baseline">
-                <div className="col-md-4 mb-1 mb-md-0">
-                  <i className="fal fa-envelope fa-fw text-secondary mr-1"></i> 您的邮箱:
-                </div>
-                <div className="col-md-8">
-                    <div className="d-flex justify-content-between align-items-center my-n1">
-                        <strong>{curUser?.email}</strong> 
-                    </div>
-                </div>
-            </div>  
-            <hr /> 
-            <div className="row align-items-baseline">
-                <div className="col-md-4 mb-1 mb-md-0">
-                  <i className="fal fa-envelope fa-fw text-secondary mr-1"></i> 用户类型:
-                </div>
-                <div className="col-md-8">
-                    <div className="d-flex justify-content-between align-items-center my-n1">
-                        <strong>{curUser?.permintion}</strong> 
-                    </div>
-                </div>
-            </div>  
-          </div>
-        </div>
+        <div className="card-header d-flex justify-content-between align-items-center">
+          <h3 className="h5   mb-0">账户信息</h3>
+        </div> 
+        <div className="card-body"> 
+          {/* <p className=" mb-4">以下是您的邮箱信息以及其他信息.</p>   */}
+          <div className="row align-items-baseline">
+              <div className="col-md-4 mb-1 mb-md-0">
+                <i className="fal fa-envelope fa-fw text-secondary mr-1"></i> 您的邮箱:
+              </div>
+              <div className="col-md-8">
+                  <div className="d-flex justify-content-between align-items-center my-n1">
+                      <strong>{curUser?.email}</strong> 
+                  </div>
+              </div>
+          </div>  
+          <hr /> 
+          <div className="row align-items-baseline">
+              <div className="col-md-4 mb-1 mb-md-0">
+                <i className="fal fa-envelope fa-fw text-secondary mr-1"></i> 用户类型:
+              </div>
+              <div className="col-md-8">
+                  <div className="d-flex justify-content-between align-items-center my-n1">
+                      <strong>{curUser?.permintion}</strong> 
+                  </div>
+              </div>
+          </div>  
+        </div> 
         <div className="card">
 
           <div className="card-header d-flex justify-content-between align-items-center">
-            <h3 className="h5  mb-0">密钥信息</h3> 
-
-
+            <h3 className="h5  mb-0">密钥信息</h3>  
             <a href="!#" className="ml-3"     data-toggle="modal"  onClick={e=>{ e.preventDefault();     setShowDialog(true);}}  >查看私钥明文</a>   
           </div>
 
           <div className="card-body">
-            <p className=" mb-4">以下是您的密钥信息</p>
+            {/* <p className=" mb-4">以下是您的密钥信息</p> */}
 
             <div className="row align-items-center">
               <div className="col-md-4 mb-1 mb-md-0">
@@ -704,9 +695,8 @@ function Account({user}){
           </div> 
 
         </div>
+        <Toast/>
       </div>
-      <Toast/>
-    </div> 
   )
 }
  
@@ -740,35 +730,32 @@ export default function MyAccount() {
                 <h5 className="font-weight-bold">用户信息</h5>  
             </div>  
           </div> 
-          <div className="card p-1">
-            <div className="d-flex justify-content-between align-items-center p-0">
-              <ul className="nav nav-tabs w-100" role="tablist"> 
-                  <li className="nav-item">
-                    <a className={`nav-link ${'myaccount' === currentTab ? 'active' : ''}`}   href={`#myaccount`}  data-toggle="tab"  onClick={() => {  setCurrentTab('myaccount');    }}  >
-                      用户详情
-                    </a>
-                  </li> 
-                  <li  className="nav-item"> 
-                    <a className={`nav-link ${'modifypassword' === currentTab ? 'active' : ''}`}   href={`#modifypassword`}  data-toggle="tab"  onClick={() => {  setCurrentTab('modifypassword');    }}  >
-                      修改密码
-                    </a>
-                  </li>
-                  <li  className="nav-item"> 
-                    <a className={`nav-link ${'modifysecretkey' === currentTab ? 'active' : ''}`}   href={`#modifysecretkey`}  data-toggle="tab"  onClick={() => {  setCurrentTab('modifysecretkey');    }}  >
-                      更换密钥
-                    </a>
-                  </li>
-              </ul>
+          <div className="d-flex justify-content-between align-items-center p-0">
+            <ul className="nav nav-tabs w-100" role="tablist"> 
+                <li className="nav-item">
+                  <a className={`nav-link ${'myaccount' === currentTab ? 'active' : ''}`}   href={`#myaccount`}  data-toggle="tab"  onClick={() => {  setCurrentTab('myaccount');    }}  >
+                    用户详情
+                  </a>
+                </li> 
+                <li  className="nav-item"> 
+                  <a className={`nav-link ${'modifypassword' === currentTab ? 'active' : ''}`}   href={`#modifypassword`}  data-toggle="tab"  onClick={() => {  setCurrentTab('modifypassword');    }}  >
+                    修改密码
+                  </a>
+                </li>
+                <li  className="nav-item"> 
+                  <a className={`nav-link ${'modifysecretkey' === currentTab ? 'active' : ''}`}   href={`#modifysecretkey`}  data-toggle="tab"  onClick={() => {  setCurrentTab('modifysecretkey');    }}  >
+                    更换密钥
+                  </a>
+                </li>
+            </ul>
+          </div>
+          <div className="card-body">
+            <div className="tab-content"> 
+              {currentTab === 'myaccount' ? <Account user={user} /> : undefined}
+              {currentTab === 'modifypassword' ? <ModifyPassword user={user}/> : undefined}
+              {currentTab === 'modifysecretkey' ? <ModifySecretKey  user={user} /> : undefined}
             </div>
-            <div className="card-body">
-              <div className="tab-content"> 
-                {currentTab === 'myaccount' ? <Account user={user} /> : undefined}
-                {currentTab === 'modifypassword' ? <ModifyPassword user={user}/> : undefined}
-                {currentTab === 'modifysecretkey' ? <ModifySecretKey  user={user} /> : undefined}
-              
-              </div>
-            </div>
-          </div>  
+          </div>
         </div> 
       </div> 
 

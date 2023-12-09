@@ -271,7 +271,7 @@ function LineChart({chartData=[],darkMode}){
   )
 } 
 
-function MapChart({chartData=[],darkMode}){  
+function MapChart({user,chartData=[],darkMode}){  
   const initalMapECharts=(mode) =>{
     const chartMap = document.getElementById('chart-map');
     if(!chartMap) return ;
@@ -300,13 +300,14 @@ function MapChart({chartData=[],darkMode}){
        
         geo: {
           map: "china",
+           
          // 开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移，可以设置成 'scale' 或者 'move'。设置成 true 为都开启
           roam: false, 
           zoom: 1.2,
           scaleLimit: 1,
           label: {
             show: true,
-            color: '#FFFFFF',
+            color: '#000',
             fontSize: 10
           }
         }, 
@@ -358,7 +359,7 @@ function MapChart({chartData=[],darkMode}){
           name:'节点数',
           type: 'map',
           mapType: 'china',            
-         
+          
           aspectScale: 0.75,
           layoutCenter: ["50%", "50%"], //地图位置
           layoutSize: '100%',
@@ -375,12 +376,15 @@ function MapChart({chartData=[],darkMode}){
 
     }; 
     mapChart.setOption(mapoption); 
-    mapChart.on("click",function(params){ 
-      if(params.value > 0){ 
-        window.location.href = '/nodelist';
-        // return <Redirect to={{ pathname: "/nodelist" }} />;
-      } 
-    })
+    if(user.permission===2){
+      mapChart.on("click",function(params){ 
+        if(params.value > 0){ 
+          window.location.href = '/nodelist';
+          // return <Redirect to={{ pathname: "/nodelist" }} />;
+        } 
+      })
+    }
+
   }
 
   // initalMapECharts();
@@ -411,6 +415,9 @@ export default function Welcome () {
     publicKey: userContext.user.publicKey || undefined,
     provider_username: userContext.user.provider_username || undefined,
     provider_pubkey: userContext.user.provider_pubkey || undefined,
+    tdh2_pubkey: userContext.user.tdh2_pubkey || undefined,
+    user_id: userContext.user.user_id || undefined,
+    permission: userContext.user.permission || undefined
   }); 
 
 
@@ -501,18 +508,16 @@ export default function Welcome () {
 
   return (
 
-    <div className="container-fluid">
-      <div className="row">
-
-        <div className="col-md-12 mb-4 mt-1">
-          <div className="d-flex flex-wrap justify-content-between align-items-center">
-              <h4 className="font-weight-bold">概况</h4> 
-          </div>
-        </div>
+    <div className="container-fluid space-bottom-2 p-3">
+      <div className="card"> 
+        <div className="header-title"> 
+          <h4 className="card-title p-2">区块链概况&nbsp;</h4> 
+         </div> 
+     
         <div className="col-md-12">
           <div className="row"> 
 
-              <div className="col-md-3">
+              <div className="col-md-2-5">
                 <div className="card">
                     <div className="card-body">
                       <div className="d-flex align-items-center">
@@ -528,7 +533,7 @@ export default function Welcome () {
                 </div>   
               </div> 
 
-              <div className="col-md-3">
+              <div className="col-md-2-5">
                 <div className="card">
                     <div className="card-body">
                         <div className="d-flex align-items-center">
@@ -544,7 +549,7 @@ export default function Welcome () {
                 </div>   
               </div>
 
-              <div className="col-md-3">
+              <div className="col-md-2-5">
                 <div className="card">
                     <div className="card-body">
                         <div className="d-flex align-items-center">
@@ -560,14 +565,35 @@ export default function Welcome () {
                 </div>   
               </div>
 
-              <div className="col-md-3">
+              <div className="col-md-2-5">
                 <div className="card">
                     <div className="card-body">
                         <div className="d-flex align-items-center">
-                            <div className="">
-                              <p className="mb-2 text-secondary">{t('home.LinkUsers')}</p>
-                              <div className="d-flex flex-wrap justify-content-start align-items-center">
+                            <div className="w-100">
+                              <div className="d-flex justify-content-between ">
+                                <p className="mb-2 text-secondary">{t('home.LinkUsers')}</p>
+                          
+                              </div>
+                              <div className="d-flex flex-wrap justify-content-between align-items-center">
                                   <h5 className="mb-0 font-weight-bold">{blockChainData?.chain?.account_count}</h5>
+                              </div>                            
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+              </div> 
+              
+              <div className="col-md-2-5">
+                <div className="card">
+                    <div className="card-body">
+                        <div className="d-flex align-items-center">
+                            <div className="w-100">
+                              <div className="d-flex justify-content-between "> 
+                                <p className="mb-2 text-secondary">合约数</p>
+                              </div>
+                              <div className="d-flex flex-wrap justify-content-between align-items-center">
+                                 
+                                  <h5 className="mb-0 font-weight-bold">{blockChainData?.chain?.contract_count}</h5>
                                   {/* <p className="mb-0 ml-3 text-danger font-weight-bold">{blockChainData?.chain?.account_percent}%</p> */}
                               </div>                            
                             </div>
@@ -575,7 +601,9 @@ export default function Welcome () {
                     </div>
                 </div>   
               </div>  
-              <MapChart chartData={blockChainData?.nodes || []} darkMode={darkMode} />
+
+
+              <MapChart user={user} chartData={blockChainData?.nodes || []} darkMode={darkMode} />
               <LineChart chartData={blockChainData?.chart || []}  darkMode={darkMode}/>
           </div> 
         </div>

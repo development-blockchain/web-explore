@@ -25,7 +25,9 @@ import Error from './pages/Error';
 import Monitor from './pages/Monitor';
 import WriteTx from './pages/WriteTx';
 import ReadTx from './pages/ReadTx';
-import AccountManage from './pages/AccountManage';
+import AccountManage from './pages/AccountManage'; 
+import ContractManage from './pages/ContractManage';
+import ContractDetail from './pages/ContractDetail'; 
 
 export default function SwitchRoute() {
   const header = document.getElementById('Header');
@@ -38,6 +40,13 @@ export default function SwitchRoute() {
     <div className="avc" style={{minHeight: `${bodySize.height - headerSize.height - footerSize.height}px`}}>
       <Switch>
 
+ 
+        <Route path="/contractdetail/:txHash">
+          <ContractDetail />
+        </Route>
+        <Route path="/contractmanage">
+            <ContractManage />
+        </Route>    
         <Route path="/accountmanage">
             <AccountManage />
         </Route>   

@@ -30,14 +30,16 @@ export default function WriteTx() {
           title: "写密文交易"
       }
     ];
-
+    if (!user.token){
+        return (window.location.href = '/login');
+    }  
 
     return (
         <main id="content" role="main"> 
             <div className="container-fluid space-bottom-2 p-3">
                 <div className="card">
                 <div className="header-title"> 
-                    <h4 className="card-title p-2">写交易管理&nbsp;</h4> 
+                    <h4 className="card-title p-2">写交易&nbsp;</h4> 
                 </div> 
                 <div className="card p-1"> 
                     <div className="card-header d-flex justify-content-between align-items-center p-0">

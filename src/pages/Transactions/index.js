@@ -187,9 +187,7 @@ export default function Transactions() {
                       ndr.push(dr_list[i])
                       }
                       }
-                      dr_list = ndr
-
-
+                      dr_list = ndr 
                       const cipher = JSON.parse(c_little)
                       for (let i = 0; i < dr_list.length; i++) {
                           verify_share(cipher, pub, dr_list[i])
@@ -201,6 +199,7 @@ export default function Transactions() {
                       console.log("decmsg: " + decmsg) 
                       
                       setMsg(decmsg);
+                      setShowMsgDlg(true);
                       prompt.inform('读取成功!');
                   }catch(err){
                       prompt.error('数据解密失败!',false);
@@ -468,7 +467,7 @@ export default function Transactions() {
       body: JSON.stringify(body),
     }),
     {manual: true, formatResult: r => r},
-); 
+  ); 
 
   const handleSelectChange =(selectOption)=>{
     setSelectState({...selectState, selectOption: selectOption});
@@ -560,7 +559,6 @@ export default function Transactions() {
               <table className="table data-table table-striped table-bordered">
                 <thead>
                   <tr>
-                   
                     <th> {t('transactions.table.TxHash')}</th> 
                     <th >{t('transactions.table.BlockHash')}</th>
                     <th >{t('transactions.table.BlockId')}</th> 
@@ -592,7 +590,6 @@ export default function Transactions() {
                   { data.length >0? data.map(item => {  
                     return (
                       <tr key={item.tx_hash}> 
-                      
                         <td>
                           <Link to={`/tx/${encodeURIComponent(item.tx_hash) }`} className="hash-tag text-truncate" style={{maxWidth:'200px'}}  title={item.tx_hash }>
                             {item.tx_hash }
@@ -624,7 +621,7 @@ export default function Transactions() {
                           <svg className="svg-icon" width="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
                           </svg>
-                      </a>
+                          </a>
                         <div className="dropdown-menu" aria-labelledby={`dropdownMenuButton-${item.block_Id}`}> 
                             <a className="dropdown-item" href="#!" onClick={e=>lookMsg(e,item?.tx?.w_type_en,item.tx_hash)}>
                                 <svg className="svg-icon text-primary" width="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -669,7 +666,7 @@ export default function Transactions() {
                 </tbody>
               </table>
             </div>
-               {/* 编辑权限 begin */}
+                {/* 编辑权限 begin */}
                <Modal show={showDialog} onHide={() => setShowDialog(false)} size="lg"   aria-labelledby="contained-modal-title-vcenter"      centered>
                   <Modal.Header closeButton className="p-2">
                       <Modal.Title id="contained-modal-title-vcenter">
@@ -692,7 +689,7 @@ export default function Transactions() {
                   </Modal.Footer>
                 </Modal>
               
-              {/* 编辑权限 end */} 
+                {/* 编辑权限 end */} 
               
 
                 {/* 读取明文或密文 begin */}
@@ -714,9 +711,7 @@ export default function Transactions() {
                   </Modal.Footer>
                 </Modal>
               
-              {/* 编辑权限 end */} 
-              
-
+                {/* 读取明文或密文 end */} 
               
             <div id="ContentPlaceHolder1_pageRecords"> 
                 <div className="d-md-flex justify-content-between my-3">

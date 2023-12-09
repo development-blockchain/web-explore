@@ -1,8 +1,16 @@
 import { useContext } from 'react'; 
 import UserContext from '../../UserContext';
-import {useLocation,Link} from 'react-router-dom'; 
-
+import {useLocation,Link} from 'react-router-dom';  
 export default function LeftMenu({user}) { 
+    const location = useLocation();
+    const localPath = location.pathname; 
+
+    const isBLockManage =  (localPath==='/blocks') || (localPath==='/transactions')
+                    || (localPath==='/accountmanage')|| (localPath==='/readtx')
+                    || (localPath==='/writetx')|| (localPath==='/contractmanage') 
+                    || (localPath.indexOf('tx')>0) || (localPath.indexOf('block')>0)|| (localPath.indexOf('contractdetail')>0);
+    
+    const isBLockMonitor = (localPath==='/nodelist') || (localPath==='/monitor') ; 
     return (
     <div className="iq-sidebar  sidebar-default">
         {/* logo  begin*/}
@@ -23,33 +31,20 @@ export default function LeftMenu({user}) {
         <div className="data-scrollbar" data-scroll="1">
             <nav className="iq-sidebar-menu">
                 <ul id="iq-sidebar-toggle" className="side-menu"> 
-                    <li className=" sidebar-layout">
+                    <li className={`sidebar-layout ${localPath==='/'?'active':''}`}>
                         <Link to='/' className="svg-icon">
                             <i className="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                                 </svg>
                             </i>
-                            <span className="ml-2">区块链概述</span> 
+                            <span className="ml-2">区块链概况</span> 
                         </Link>  
                     </li> 
                     {user.token ? 
-                        <> 
-                            <li className=" sidebar-layout">
-                                <Link to='/myaccount' className="svg-icon">
-                                    <i className="">
-                                        <svg className="svg-icon" id="iq-user-1-1" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </i>
-                                    <span className="ml-2">用户信息</span> 
-                                </Link>  
-                            </li>
-
-                            <li className="sidebar-layout">
-                                <a href="#blockmanage" className="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
+                        <>  
+                            <li className={`sidebar-layout ${isBLockManage?'active':''}`}>
+                                <a href="#blockmanage" className={`svg-icon ${(isBLockManage||localPath==='/')?'':'collapsed'} `} data-toggle="collapse" aria-expanded="false">
                                     <i>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -60,8 +55,8 @@ export default function LeftMenu({user}) {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                                     </svg>
                                 </a>
-                                <ul id="blockmanage" className="submenu collapse" data-parent="#iq-sidebar-toggle">                        
-                                    <li className=" sidebar-layout">
+                                <ul id="blockmanage" className={`submenu ${(isBLockManage||localPath==='/')?'':'collapse'} `}  data-parent="#iq-sidebar-toggle">                        
+                                    <li className={`sidebar-layout ${(localPath==='/blocks'||localPath.indexOf('block')>0)?'active':''}`} >
                                         <Link to='/blocks' className="svg-icon">
                                             <i className="">
                                                 <svg className="svg-icon" width="18" id="iq-ui-1-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -71,7 +66,7 @@ export default function LeftMenu({user}) {
                                             <span className="ml-2">区块列表</span>
                                         </Link>
                                     </li>
-                                    <li className=" sidebar-layout">
+                                    <li className={`sidebar-layout ${(localPath==='/transactions'||localPath.indexOf('tx')>0)?'active':''}`}>
                                         <Link to='/transactions' className="svg-icon">
                                             <i className="">
                                                 <svg className="icon line" width="18" id="receipt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor">
@@ -82,19 +77,6 @@ export default function LeftMenu({user}) {
                                             <span className="ml-2">交易列表</span>
                                         </Link>
                                     </li>
-                                    {(user.token &&user.permission===2)?
-                                    <li className=" sidebar-layout">
-                                        <Link to='/accountmanage' className="svg-icon">
-                                            <i className="">
-                                                <svg className="svg-icon" width="18" id="iq-user-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                                </svg>
-                                            </i>
-                                            <span className="ml-2">账户管理</span>
-                                        </Link> 
-                                    </li>:""
-                                    }
-
                                     <li className=" sidebar-layout">
                                         <Link to='/readtx' className="svg-icon">
                                             <i className="">
@@ -105,7 +87,7 @@ export default function LeftMenu({user}) {
                                             <span className="ml-2">读交易</span>
                                         </Link>
                                     </li>
-                                    <li className=" sidebar-layout">
+                                    <li className={`sidebar-layout ${localPath==='/writetx'?'active':''}`} >
                                         <Link to='/writetx' className="svg-icon">
                                             <i className="">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -115,8 +97,8 @@ export default function LeftMenu({user}) {
                                             <span className="ml-2">写交易</span>
                                         </Link> 
                                     </li> 
-                                    <li className=" sidebar-layout">
-                                        <Link to='/#' className="svg-icon">
+                                    <li className={`sidebar-layout ${localPath==='/contractmanage'?'active':''}`} >
+                                        <Link to='/contractmanage' className="svg-icon">
                                             <i className="">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -135,8 +117,8 @@ export default function LeftMenu({user}) {
                     {
                     (user.token &&user.permission===2)?
                         <>
-                          <li className="sidebar-layout">
-                                <a href="#monitorLog" className="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
+                          <li className={`sidebar-layout ${isBLockMonitor?'active':''}`}>
+                                <a href="#monitorLog" className={`svg-icon ${isBLockMonitor?'':'collapsed'} `}  data-toggle="collapse" aria-expanded="false">
                                     <i>
                                         <svg className="svg-icon" width="18" id="iq-ui-1-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" strokeDasharray="84,104" stroke-strokedashoffset={0}></path>
@@ -147,8 +129,8 @@ export default function LeftMenu({user}) {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                                     </svg>
                                 </a>
-                                <ul id="monitorLog" className="submenu collapse" data-parent="#iq-sidebar-toggle"> 
-                                    <li className=" sidebar-layout">
+                                <ul id="monitorLog" className={`submenu ${isBLockMonitor?'':'collapse'} `}  data-parent="#iq-sidebar-toggle"> 
+                                    <li className={`sidebar-layout ${localPath==='/nodelist'?'active':''}`}>
                                         <Link to='/nodelist' className="svg-icon">
                                             <i className="">
                                                 <svg className="svg-icon" width="18" id="iq-ui-1-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -158,7 +140,7 @@ export default function LeftMenu({user}) {
                                             <span className="ml-2">节点详情</span>
                                         </Link>
                                     </li> 
-                                    <li className=" sidebar-layout">
+                                    <li className={`sidebar-layout ${localPath==='/monitor'?'active':''}`}>
                                         <Link to='/monitor' className="svg-icon">
                                             <i className="">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">

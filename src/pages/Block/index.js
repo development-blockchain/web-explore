@@ -30,9 +30,9 @@ function Detail({data = {}, block, loading, error}) {
 
   const block_no = Number(data.block_Id);
   const block_hash = data.block_hash; 
-  const tx_counts = Number(data.tx_counts);   
-    const now = new Date().getTime(); 
-    const time = moment(now - Number(data.interval_timestamp)*1000)
+  const tx_counts = Number(data.tx_counts);    
+  const now = new Date().getTime(); 
+  const time = moment(now - Number(data.interval_timestamp)*1000)
       .startOf('minute')
       .fromNow(); 
 
@@ -74,7 +74,7 @@ function Detail({data = {}, block, loading, error}) {
             </div>
             <div className="col-md-9">
               <i className="far fa-clock small mr-1"></i>
-              {time}  ({moment(data.time_stamp).local().format('YYYY-MM-DD HH:mm:ss')})
+              {time}  ({moment(data.timestamp).format('YYYY-MM-DD HH:mm:ss')})
             </div>
           </div> 
           <hr className="hr-space mt-2" />

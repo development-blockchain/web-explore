@@ -87,7 +87,7 @@ export default function ContractList() {
   //查询交易
   const tradeListRequest = useRequest(
     body => ({
-      url: '/chainBrowser/blockchain/getTxs',
+      url: '/chainBrowser/blockchain/getContracts',
       method: 'post',
       headers: {
         'Authorization': user.token,
@@ -119,90 +119,113 @@ export default function ContractList() {
   const trade_counts = tradeListRequest.data?.counts || 0;
   const totalPage = Math.ceil(Number(trade_counts) / state.body.length);
 
-  return (
-    <main id="content" role="main"> 
-      <div className="container-fluid space-bottom-2 p-3">
-        <div className="card">
-          <div className="header-title">
-              <h4 className="card-title p-2">合约列表&nbsp;</h4>
-          </div>
-          <div className="card-body">
-            <div  className="row d-md-flex justify-content-between mb-1"> 
-              <p className="ml-3 mb-2 mb-md-0"> 
-                 共有{counts}条记录
-              </p>
+  return ( 
+    <div className="container-fluid space-bottom-2"> 
+      <div  className="row d-md-flex justify-content-between mb-1"> 
+        <p className="ml-3 mb-2 mb-md-0"> 
+        共有{counts}条记录
+        </p>
+        <div className="mr-3">
+          <div className="input-group input-group-shadow">
+            {/* <div className="input-group-prepend d-md-block mr-2" >
+              <select id="selectKey" className="form-control form-control-sm mb-3 "   onChange={e=>handleSelectField(e)} value={params.field}>
+                    <option value="" >请选择关键字</option>
+                    <option value="chain_user_id">链上</option>
+                    <option value="block_id">区块高度</option>
+                    <option value="block_hash">区块哈希</option> 
+                    <option value="txhash">交易哈希</option> 
+              </select> 
+            </div>   */}
+            <input type="text" className="form-control form-control-sm mr-2" id="keywrokds"  placeholder="请输入区块高度/区块哈希/交易哈希" 
+            style={{width:'250px'}} value={params.value} onChange={e=>handleChangeValue(e)}  /> 
+            <div className="">
+              <button type="button" className="btn btn-primary btn-sm" onClick={e=>queryData(e)}>搜索</button>
             </div>
-            <div className="table-responsive mb-2 mb-md-0">
-              <table className="table data-table table-striped table-bordered">
-                <thead>
-                  <tr>
-                    <th> A</th> 
-                    <th >B</th>
-                    <th >C</th> 
-                    <th>D</th>   
-                    <th>E</th>    
-                  </tr>
-                </thead>
-                <tbody> 
-                  { data.length >0? data.map(item => {  
-                    return (
-                      <tr key={item.block_Id}> 
-                      
-                        <td>
-                          <Link to={`/tx/${encodeURIComponent(item.tx_hash) }`} className="hash-tag text-truncate" style={{maxWidth:'200px'}}  title={item.tx_hash }>
-                            {item.tx_hash }
-                          </Link> 
-                        </td> 
-                        <td> 
-                          <Link to={`/block/${encodeURIComponent(item.block_hash) }`} className="hash-tag text-truncate" data-toggle="tooltip" style={{maxWidth:'200px'}} title={item.block_hash } >
-                            {item.block_hash }
-                          </Link>  
-                        </td>  
-                        <td> 
-                          <Link to={`/block/${item.block_Id }`} className="hash-tag text-truncate" data-toggle="tooltip" style={{maxWidth:'200px'}} title={item.block_Id }   >
-                            {item.block_Id }
-                          </Link>  
-                        </td>  
-                        <td>
-                          { 
-                          item.tx_type ===12?
-                            <span className="u-label u-label--sm u-label--success rounded">Admin交易</span>:
-                            (item.tx_type===14?<span className="u-label u-label--sm u-label--warning rounded">合约交易</span> :
-                            <span className="u-label u-label--sm u-label--info rounded">普通交易</span> )
-                          }  
-                        </td> 
-                        <TimeTD time={item.timestamp} interval={item.interval_timestamp} type={type} />
-                        <td>{item.tx_index }</td> 
-                        
-                      </tr>
-                    );
-                  }):
-                  <tr key={1}>
-                    <td colSpan={8} className="text-center">无数据</td>
-                  </tr>
-                }
-                </tbody>
-              </table>
-            </div>              
-            <div id="ContentPlaceHolder1_pageRecords"> 
-                <div className="d-md-flex justify-content-between my-3">
-                  <div className="d-flex align-items-center text-secondary mb-2 mb-md-0">
-                    <span style={{width:60}}>显示</span>
-                    <select onChange={handleChangePageSize} className="custom-select custom-select-xs mx-2" value={state.body.length}>
-                      <option value="10">10</option>
-                      <option value="25">25</option>
-                      <option value="50">50</option>
-                      <option value="100">100</option>
-                    </select>
-                    <span style={{width:60}}> 记录</span>
-                  </div> 
-                  <Pager4 path="/transactions" current={params.start} handleChangPageNum={handleChangPageNum} total={totalPage} />
-                </div> 
-            </div>
-          </div>
-        </div>
-      </div>
-      <Toast/> 
-    </main>
+          </div> 
+        </div> 
+      </div>            
+      <div className="table-responsive mb-2 mb-md-0">
+        <table className="table data-table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>区块高度</th> 
+              <th>区块哈希</th>
+              <th>交易哈希</th>
+              <th>链上用户</th>   
+              <th>方法</th>    
+              <th>版本</th>   
+              <th scope="col"> 
+                  <div className="mr-2">
+                    {
+                      (type ==='showAge')?
+                        <LinkWithTooltip placement="bottom" tooltip="点击切换日期格式">
+                          <a href="#!" title="" onClick={e => {  e.preventDefault(); setType('showDate'); }} >
+                          块龄
+                          </a>
+                        </LinkWithTooltip>
+                      :
+                        <LinkWithTooltip placement="bottom" tooltip="点击切换块龄格式"> 
+                          <a href="#!" onClick={e => {  e.preventDefault(); setType('showAge'); }}    > 
+                          日期时间(UTC)
+                          </a>
+                        </LinkWithTooltip>
+                    }
+                  </div>
+              </th>  
+              <th>状态</th>    
+            </tr>
+          </thead>
+          <tbody> 
+            { data.length >0? data.map(item => {  
+              return (
+                <tr key={item.block_Id}>  
+                    <td> 
+                    <Link to={`/block/${item.block_Id }`} className="hash-tag text-truncate" data-toggle="tooltip" style={{maxWidth:'200px'}} title={item.block_Id }   >
+                      {item.block_Id }
+                    </Link>  
+                  </td>  
+                    <td> 
+                    <Link to={`/block/${encodeURIComponent(item.block_hash) }`} className="hash-tag text-truncate" data-toggle="tooltip" style={{maxWidth:'200px'}} title={item.block_hash } >
+                      {item.block_hash }
+                    </Link>  
+                  </td>  
+                  <td>
+                    <Link to={`/tx/${encodeURIComponent(item.tx_hash) }`} className="hash-tag text-truncate" style={{maxWidth:'200px'}}  title={item.tx_hash }>
+                      {item.tx_hash }
+                    </Link> 
+                  </td> 
+                  <td>{item.chain_user_id }</td> 
+                  <td>{item.method }</td> 
+                  <td>{item.version }</td>  
+                  
+                  <TimeTD time={item.timestamp} interval={item.interval_timestamp} type={type} />
+                  <td>{item.state }</td>  
+                </tr>
+              );
+            }):
+            <tr key={1}>
+              <td colSpan={8} className="text-center">无数据</td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>              
+      <div id="ContentPlaceHolder1_pageRecords"> 
+          <div className="d-md-flex justify-content-between my-3">
+            <div className="d-flex align-items-center text-secondary mb-2 mb-md-0">
+              <span style={{width:60}}>显示</span>
+              <select onChange={handleChangePageSize} className="custom-select custom-select-xs mx-2" value={state.body.length}>
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <span style={{width:60}}> 记录</span>
+            </div> 
+            <Pager4 path="/transactions" current={params.start} handleChangPageNum={handleChangPageNum} total={totalPage} />
+          </div> 
+      </div> 
+      <Toast/>  
+    </div> 
   );
 }

@@ -237,8 +237,8 @@ export default function MonitorKafa({address, overview}) {
                     <tr>       
                       <th scope="col">编号</th>
                       <th scope="col">标签名称</th>
-                      <th scope="col">Brokers</th>
-                      <th scope="col">Topic</th>
+                      <th scope="col">代理地址</th>
+                      <th scope="col">主题</th>
                       <th scope="col">创建时间</th>
                       <th scope="col">更新时间</th>
                       <th scope="col">
@@ -302,22 +302,22 @@ export default function MonitorKafa({address, overview}) {
                     <div class="col-md-12 mb-3">
                       <div className={`js-form-message form-group ${errors.brokers ? 'u-has-error' : ''}`}>
                           <span className="d-flex justify-content-between align-items-center">
-                          Brokers
+                          代理地址
                           </span>
-                          <input type="text" class="form-control" id="brokers" placeholder="请输入Brokers"    value={form.brokers}  onChange={handleForm('brokers')}  onBlur={handleBlur('brokers')}  />
+                          <input type="text" class="form-control" id="brokers" placeholder="请输入代理地址"    value={form.brokers}  onChange={handleForm('brokers')}  onBlur={handleBlur('brokers')}  />
                           <div className="invalid-feedback" style={{display: errors.brokers ? 'block' : 'none'}}> 
-                          Brokers不能为空
+                            代理地址不能为空
                           </div>
                       </div>
                     </div>   
                     <div class="col-md-12 mb-3">
                       <div className={`js-form-message form-group ${errors.topic ? 'u-has-error' : ''}`}>
                           <span className="d-flex justify-content-between align-items-center">
-                            Topic
+                          主题
                           </span>
-                          <input type="text" class="form-control" id="topic" placeholder="请输入Topic"    value={form.topic}  onChange={handleForm('topic')}  onBlur={handleBlur('topic')}  />
+                          <input type="text" class="form-control" id="topic" placeholder="请输入主题"    value={form.topic}  onChange={handleForm('topic')}  onBlur={handleBlur('topic')}  />
                           <div className="invalid-feedback" style={{display: errors.topic ? 'block' : 'none'}}> 
-                            Topic不能为空
+                          主题不能为空
                           </div>
                       </div>
                     </div>  
