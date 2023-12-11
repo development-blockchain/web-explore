@@ -281,6 +281,22 @@ function PublishContract({user}){
             setErrors(_errors);
             return ;
         }
+         
+        if(!window.Web3.utils.isHex(form.code)){
+            prompt.error('编码格式不正确!',false);
+            return ;
+        }
+        const web3 = new window.Web3();
+        if(web3){ 
+            try {
+               const contract =  new web3.eth.Contract(JSON.parse(form.abi));
+        
+            } catch (error) {
+                prompt.error('合约格式不正确!',false);
+                return ;
+            }
+        }
+
         T.loading("正在部署...");  
         const date=new Date(); 
         const curTimestamp = date.getTime();    

@@ -271,7 +271,7 @@ export default function Transactions() {
     addAclRequest.run({...form}).then( 
       res => {   
           T.loaded(); 
-          setState({...state,selectOption:[]})
+          setSelectState({...selectState,selectOption:[]})
           if (res.code === 0) {  
               prompt.inform('发送成功!');
               setShowDialog(false);
@@ -332,7 +332,7 @@ export default function Transactions() {
     delAclRequest.run({...form}).then( 
       res => {   
           T.loaded(); 
-          setState({...state,selectOption:[]})
+          setSelectState({...selectState,selectOption:[]})
           if (res.code === 0) {  
               prompt.inform('发送成功!');
               setShowDialog(false);

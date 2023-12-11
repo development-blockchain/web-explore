@@ -184,7 +184,7 @@ export default function MonitorKafa({address, overview}) {
     //编辑
   const editNode = (e,item)=>{ 
     e.preventDefault();   
-    setForm({id:item.id,tag_name:item.tag_name,node_url:item.node_url})
+    setForm({id:item.id,tag_name:item.tag_name,brokers:item.brokers,topic:item.topic})
     setIsShow(true);
     setType(2);
   }
