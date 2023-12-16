@@ -1,7 +1,7 @@
 import { useRequest } from 'ahooks';
 import React, { useEffect, useMemo, useRef, useState,useContext } from 'react';
 import UserContext from '../../UserContext'; 
-import { Link,Redirect} from "react-router-dom";
+import { useLocation,Link,Redirect} from "react-router-dom";
 import useWebSocket from 'react-use-websocket';
 import Loading from '../../components/Loading';
 // 引入ECharts主模块 
@@ -420,6 +420,8 @@ export default function Welcome () {
     permission: userContext.user.permission || undefined
   }); 
 
+  const domain = window.location.host;
+  const protocol = window.location.protocol;
 
   const {t} = useTranslation(['home']); 
 
@@ -436,7 +438,10 @@ export default function Welcome () {
   const [latestTrade, setLatestTrade] = useState(); 
 
   const messageHistory = useRef([]); 
-  const { lastMessage, readyState } = useWebSocket('ws://47.104.157.94:8080/chainBrowser/blockchain/ws/getLatestBlocksAndTxs');
+  const wsUrl = (protocol==='http:'?'ws://':'wss://') + domain+ '/chainBrowser/blockchain/ws/getLatestBlocksAndTxs';
+  // 'ws://47.104.157.94:8080/chainBrowser/blockchain/ws/getLatestBlocksAndTxs' 
+  console.log(wsUrl)
+  const { lastMessage, readyState } = useWebSocket(wsUrl);
 
   messageHistory.current = useMemo(() => lastMessage); 
  
